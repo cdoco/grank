@@ -1,6 +1,6 @@
 {
     "name": "grank",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Github Rank Cli",
     "main": "lib/cli.js",
     "bin": {
@@ -13,7 +13,8 @@
         "build": "npm run clean && babel src -d lib --copy-files --ignore '**/*.spec.js' -s && npm run pack",
         "pack": "pkg . --out-path packed",
         "clean": "rimraf lib packed",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "prepublishOnly": "npm run build && echo '#!/usr/bin/env node' | cat - lib/cli.js > temp && mv temp lib/cli.js"
     },
     "repository": {
         "type": "git",
