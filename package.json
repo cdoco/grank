@@ -1,0 +1,75 @@
+{
+    "name": "gr",
+    "version": "1.0.0",
+    "description": "Github Rank Cli",
+    "main": "lib/cli.js",
+    "bin": {
+        "gr": "lib/cli.js"
+    },
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "build": "npm run clean && babel src -d lib --copy-files --ignore '**/*.spec.js' -s && npm run pack",
+        "pack": "pkg . --out-path packed",
+        "clean": "rimraf lib packed",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/cdoco/gr.git"
+    },
+    "keywords": [
+        "github",
+        "rank",
+        "cli"
+    ],
+    "author": "ZiHang Gao",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/cdoco/gr/issues"
+    },
+    "homepage": "https://github.com/cdoco/gr#readme",
+    "dependencies": {
+        "async-to-gen": "^1.3.3",
+        "babel-register": "^6.26.0",
+        "cfonts": "^1.1.3",
+        "chalk": "^2.3.0",
+        "cli-table2": "^0.2.0",
+        "didyoumean": "^1.2.1",
+        "commander": "^2.11.0",
+        "is-async-supported": "^1.2.0",
+        "update-notifier": "^2.3.0",
+        "axios": "^0.17.1",
+        "ora": "^1.3.0"
+    },
+    "pkg": {
+        "scripts": [
+            "lib/**/*.js",
+            "node_modules/blessed/lib/**/*.js"
+        ],
+        "assets": "lib/data/fonts/*"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-eslint": "^8.0.1",
+        "babel-jest": "^21.2.0",
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "eslint": "^4.9.0",
+        "eslint-config-airbnb": "^16.1.0",
+        "eslint-config-prettier": "^2.6.0",
+        "eslint-plugin-babel": "^4.1.2",
+        "eslint-plugin-import": "^2.8.0",
+        "eslint-plugin-jsx-a11y": "^6.0.2",
+        "eslint-plugin-prettier": "^2.3.1",
+        "eslint-plugin-react": "^7.4.0",
+        "husky": "^0.14.3",
+        "jest": "^21.2.1",
+        "lint-staged": "^5.0.0",
+        "pkg": "^4.3.0-beta.4",
+        "prettier": "^1.8.2",
+        "rimraf": "^2.6.2"
+    }
+}
