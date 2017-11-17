@@ -38,8 +38,8 @@ const gr = (query, option) => {
     let instance = axios.create({
         baseURL: 'https://api.github.com',
         auth: {
-            username: 'cdoco',
-            password: '3bff8d2dee642a86b9d3a7a6406b21ffd39661cb'
+            username: '',
+            password: ''
         }
     });
 
@@ -48,7 +48,7 @@ const gr = (query, option) => {
     setTimeout(() => {
         spinner.color = 'yellow';
         spinner.text = bold('网速有点慢, 不要着急哦 ^_^ !');
-    }, 2000);
+    }, 3000);
 
     instance.get('/search/users', {
         params: {
@@ -79,9 +79,11 @@ const gr = (query, option) => {
         spinner.stop();
         console.log(grTable.toString());
     }).catch(error => {
-        console.log(error);
+        spinner.text = bold(red('加载失败!'));
+        setTimeout(() => {
+            spinner.stop();
+        }, 1000);
     });
-
 };
 
 export default gr;
