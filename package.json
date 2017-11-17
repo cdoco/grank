@@ -1,5 +1,5 @@
 {
-    "name": "gr",
+    "name": "grank",
     "version": "1.0.0",
     "description": "Github Rank Cli",
     "main": "lib/cli.js",

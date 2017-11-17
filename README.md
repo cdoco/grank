@@ -1,3 +1,3 @@
-# gr
+# grank
 
 Github Rank Cli
