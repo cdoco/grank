@@ -1,10 +1,10 @@
 {
     "name": "grank",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Github Rank Cli",
     "main": "lib/cli.js",
     "bin": {
-        "gr": "lib/cli.js"
+        "grank": "lib/cli.js"
     },
     "files": [
         "lib"
@@ -17,7 +17,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com/cdoco/gr.git"
+        "url": "git+ssh://git@github.com/cdoco/grank.git"
     },
     "keywords": [
         "github",
@@ -27,9 +27,9 @@
     "author": "ZiHang Gao",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/cdoco/gr/issues"
+        "url": "https://github.com/cdoco/grank/issues"
     },
-    "homepage": "https://github.com/cdoco/gr#readme",
+    "homepage": "https://github.com/cdoco/grank#readme",
     "dependencies": {
         "async-to-gen": "^1.3.3",
         "babel-register": "^6.26.0",
