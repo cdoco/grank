@@ -34,15 +34,6 @@ const gr = (query, option) => {
         ])
     );
 
-    //auth 
-    let instance = axios.create({
-        baseURL: 'https://api.github.com',
-        auth: {
-            username: '',
-            password: ''
-        }
-    });
-
     //loading style
     const spinner = ora(bold('Loading GitHub Rank')).start();
     setTimeout(() => {
@@ -50,7 +41,7 @@ const gr = (query, option) => {
         spinner.text = bold('网速有点慢, 不要着急哦 ^_^ !');
     }, 3000);
 
-    instance.get('/search/users', {
+    axios.get('https://api.github.com/search/users', {
         params: {
             q: query,
             per_page: option.num
@@ -59,7 +50,7 @@ const gr = (query, option) => {
 
         let index = 1;
         for (var value of rsp.data.items) {
-            let info = await instance.get(value.url);
+            let info = await axios.get(value.url);
 
             grTable.push(
                 alignCenter([
