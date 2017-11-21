@@ -3,12 +3,26 @@ import ora from 'ora';
 import pMap from 'p-map';
 
 import { basicTable } from '../utils/table';
-import { red, bold, neonGreen } from '../utils/chalk';
+import { error, red, bold, neonGreen } from '../utils/chalk';
 
 const alignCenter = columns =>
     columns.map(content => ({ content, hAlign: 'left', vAlign: 'center' }));
 
+const catchError = (err, apiName) => {
+    error(err);
+    console.log('');
+    error(`Oops, ${apiName} goes wrong.`);
+    error(
+        'Please run grank again.\nIf it still does not work, feel free to open an issue on https://github.com/cdoco/grank/issues'
+    );
+    process.exit(1);
+};
+
 const grank = async(query, option) => {
+    let userInfos;
+    //设定默认值
+    query = query || 'location:china';
+    option.num = option.num || 10;
     const grankTable = basicTable();
 
     grankTable.push(
@@ -38,20 +52,35 @@ const grank = async(query, option) => {
     //loading style
     const spinner = ora('Loading GitHub Rank').start();
 
-    const rsp = await axios.get('https://api.github.com/search/users', {
-        params: {
-            q: query,
-            per_page: option.num,
-            page: option.page,
-            sort: option.sort,
-            order: option.order
-        }
-    });
+    try {
+        const rsp = await axios.get('https://api.github.com/search/users', {
+            params: {
+                q: query,
+                per_page: option.num,
+                page: option.page,
+                sort: option.sort,
+                order: option.order
+            }
+        });
+        userInfos = rsp.data;
+    } catch (error) {
+        spinner.stop();
+        catchError(error, 'Grank.Users');
+    }
 
     await pMap(
-        rsp.data.items,
+        userInfos.items,
         async(item, index) => {
-            const info = await axios.get(item.url);
+            let detail;
+
+            try {
+                const rsp = await axios.get(item.url);
+                detail = rsp.data;
+            } catch (error) {
+                spinner.stop();
+                catchError(error, 'Grank.UsersDetail');
+            }
+
             const {
                 login,
                 name,
@@ -60,7 +89,7 @@ const grank = async(query, option) => {
                 public_repos,
                 followers,
                 created_at
-            } = info.data;
+            } = detail;
 
             grankTable.push(
                 alignCenter([
