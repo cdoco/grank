@@ -36,12 +36,15 @@ const grank = async(query, option) => {
     );
 
     //loading style
-    const spinner = ora(bold('Loading GitHub Rank')).start();
+    const spinner = ora('Loading GitHub Rank').start();
 
     const rsp = await axios.get('https://api.github.com/search/users', {
         params: {
             q: query,
-            per_page: option.num
+            per_page: option.num,
+            page: option.page,
+            sort: option.sort,
+            order: option.order
         }
     });
 
@@ -71,7 +74,7 @@ const grank = async(query, option) => {
                     created_at,
                 ])
             );
-        }
+        }, { concurrency: 1 }
     );
 
     spinner.stop();
