@@ -1,5 +1,6 @@
 import axios from 'axios';
 import ora from 'ora';
+import pMap from 'p-map';
 
 import { basicTable } from '../utils/table';
 import { red, bold, neonGreen } from '../utils/chalk';
@@ -7,10 +8,10 @@ import { red, bold, neonGreen } from '../utils/chalk';
 const alignCenter = columns =>
     columns.map(content => ({ content, hAlign: 'left', vAlign: 'center' }));
 
-const gr = (query, option) => {
-    const grTable = basicTable();
+const grank = async(query, option) => {
+    const grankTable = basicTable();
 
-    grTable.push(
+    grankTable.push(
         [{
             colSpan: 8,
             content: bold("Github Rank"),
@@ -36,45 +37,46 @@ const gr = (query, option) => {
 
     //loading style
     const spinner = ora(bold('Loading GitHub Rank')).start();
-    setTimeout(() => {
-        spinner.color = 'yellow';
-        spinner.text = bold('网速有点慢, 不要着急哦 ^_^ !');
-    }, 3000);
 
-    axios.get('https://api.github.com/search/users', {
+    const rsp = await axios.get('https://api.github.com/search/users', {
         params: {
             q: query,
             per_page: option.num
         }
-    }).then(async(rsp) => {
+    });
 
-        let index = 1;
-        for (var value of rsp.data.items) {
-            let info = await axios.get(value.url);
+    await pMap(
+        rsp.data.items,
+        async(item, index) => {
+            const info = await axios.get(item.url);
+            const {
+                login,
+                name,
+                location,
+                blog,
+                public_repos,
+                followers,
+                created_at
+            } = info.data;
 
-            grTable.push(
+            grankTable.push(
                 alignCenter([
-                    index,
-                    info.data.login,
-                    info.data.name,
-                    info.data.location,
-                    info.data.blog,
-                    info.data.public_repos,
-                    info.data.followers,
-                    info.data.created_at,
+                    ++index,
+                    login,
+                    name,
+                    location,
+                    blog,
+                    public_repos,
+                    followers,
+                    created_at,
                 ])
             );
-            index++;
         }
-    }).then(() => {
-        spinner.stop();
-        console.log(grTable.toString());
-    }).catch(error => {
-        spinner.text = bold(red('加载失败!'));
-        setTimeout(() => {
-            spinner.stop();
-        }, 1000);
-    });
+    );
+
+    spinner.stop();
+
+    console.log(grankTable.toString());
 };
 
-export default gr;
+export default grank;

@@ -4,7 +4,7 @@ import didYouMean from 'didyoumean';
 import chalk from 'chalk';
 import updateNotifier from 'update-notifier';
 
-import gr from './command';
+import grank from './command';
 import { error, bold, red } from './utils/chalk';
 
 import pkg from '../package.json';
@@ -32,7 +32,7 @@ program
         console.log('');
     })
     .action((query, option) => {
-        gr(query, option);
+        grank(query, option);
     });
 
 program.on('--help', () => {
