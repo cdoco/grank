@@ -1,6 +1,4 @@
-# grank
-
-Github Rank Cli
+<div align=center><img src="https://cdoco.com/images/grank.png" alt="grank"/></div>
 
 ## Install
 
