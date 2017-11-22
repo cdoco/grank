@@ -25,9 +25,9 @@ program
     .command('user [query]')
     .alias('u')
     .option('-s, --sort <sort>', "排序依据, 值可为 followers, repositories, or joined。默认为 best match")
-    .option('-o, --order <order>', "排序顺序, desc 或 asc。默认为 desc。")
-    .option('-n, --num <n>', "查询的数量, 默认为 10。")
-    .option('-p, --page <n>', "查询的页数, 默认为 1。")
+    .option('-o, --order <order>', "排序顺序, desc 或 asc。默认为 desc")
+    .option('-n, --num <n>', "查询的数量, 默认为 10")
+    .option('-p, --page <n>', "查询的页数, 默认为 1")
     .on('--help', () => {
         console.log('');
         console.log('');
@@ -52,6 +52,20 @@ program
     })
     .action((query, option) => {
         grank.user(query, option);
+    });
+
+program
+    .command('repo [query]')
+    .alias('r')
+    .option('-s, --sort <sort>', "排序依据，值可取 stars, forks, updated。默认为 best match")
+    .option('-o, --order <order>', "排序顺序, desc 或 asc。默认为 desc")
+    .option('-n, --num <n>', "查询的数量, 默认为 10")
+    .option('-p, --page <n>', "查询的页数, 默认为 1")
+    .on('--help', () => {
+        console.log('');
+    })
+    .action((query, option) => {
+        grank.repo(query, option);
     });
 
 program.on('--help', () => {
