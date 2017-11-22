@@ -11,7 +11,7 @@ npm install -g grank
 ## Usage
 
 ```js
-grank user "location:china" -n 5 -s followers -o desc
+grank user "location:china+language:c" -n 5 -s followers -o desc
 ```
 
 ## License

@@ -45,6 +45,10 @@ program
         console.log('');
         console.log(`    followers: 关注数量过滤字段, eg: ${neonGreen('followers:100')}`);
         console.log('');
+        console.log(`  示例:`);
+        console.log('');
+        console.log(`  ${neonGreen('grank user "location:china+language:c" -n 5 -s followers -o desc')}`);
+        console.log('');
     })
     .action((query, option) => {
         grank(query, option);

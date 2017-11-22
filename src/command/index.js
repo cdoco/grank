@@ -53,9 +53,8 @@ const grank = async(query, option) => {
     const spinner = ora('Loading GitHub Rank').start();
 
     try {
-        const rsp = await axios.get('https://api.github.com/search/users', {
+        const rsp = await axios.get('https://api.github.com/search/users?q=' + query, {
             params: {
-                q: query,
                 per_page: option.num,
                 page: option.page,
                 sort: option.sort,
