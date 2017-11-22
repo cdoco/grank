@@ -51,7 +51,7 @@ program
         console.log('');
     })
     .action((query, option) => {
-        grank(query, option);
+        grank.user(query, option);
     });
 
 program.on('--help', () => {
