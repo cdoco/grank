@@ -47,7 +47,7 @@ program
         console.log('');
         console.log(`  示例:`);
         console.log('');
-        console.log(`  ${neonGreen('grank user "location:china+language:c" -n 5 -s followers -o desc')}`);
+        console.log(`  ${neonGreen('grank user location:china+language:c -n 5 -s followers -o desc')}`);
         console.log('');
     })
     .action((query, option) => {
@@ -63,6 +63,21 @@ program
     .option('-p, --page <n>', "查询的页数, 默认为 1")
     .on('--help', () => {
         console.log('');
+        console.log('');
+        console.log(`  query 字段的可用取值:`);
+        console.log('');
+        console.log(`    in: 在何字段中对q进行搜索。可用值为repository相关response中的字段, eg: ${neonGreen('in:c')}`);
+        console.log('');
+        console.log(`    forks: forks字段过滤, eg: ${neonGreen('forks:100')}`);
+        console.log('');
+        console.log(`    stars: 同forks，过滤使用, eg: ${neonGreen('stars:100')}`);
+        console.log('');
+        console.log(`    language: 搜索的语言类型，例 java,c,python 等, eg: ${neonGreen('language:node')}`);
+        console.log('');
+        console.log(`  示例:`);
+        console.log('');
+        console.log(`  ${neonGreen('grank repo language:c -n 5 -s stars -o desc')}`);
+        console.log('');
     })
     .action((query, option) => {
         grank.repo(query, option);
@@ -73,9 +88,11 @@ program.on('--help', () => {
             console.log('');
             console.log(`  Welcome to ${chalk`{bold.hex('#0069b9') Github Rank}`} ${red('Cli')} !`);
             console.log('');
-            console.log(`  查询用户排名: ${neonGreen('grank user <query>')}`);
+            console.log(`  查询用户排名: ${neonGreen('grank user [query]')}`);
             console.log('');
-            console.log(`  想要获取更多的信息你可以查看帮助文档 ${neonGreen('grank user -h')}`);
+            console.log(`  查询仓库排名: ${neonGreen('grank repo [query]')}`);
+            console.log('');
+            console.log(`  想要获取更多的信息你可以查看帮助文档 ${neonGreen('grank user -h')} or ${neonGreen('grank repo -h')}`);
             console.log('');
 });
 

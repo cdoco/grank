@@ -20,7 +20,7 @@ const catchError = (err, apiName) => {
     process.exit(1);
 };
 
-const user = async(query = 'location:china', { num = 10, page, sort, order }) => {
+const user = async(query = 'location:china', { num = 10, page, sort, order } = {}) => {
     let userInfos;
     const userTable = basicTable();
 
