@@ -33,8 +33,6 @@ location|所在地过滤|`location:china`
 language|所拥有的repos语言过滤|`language:node`
 followers|关注数量过滤字段|`followers:100`
 
----
-
 可选字段
 
 字段|含义
@@ -43,6 +41,8 @@ num|每页需要查询的数量
 sort|排序依据，值可为followers, repositories, or joined。默认为 best match
 order|排序顺序，desc或asc。默认为desc
 page|查询第几页
+
+---
 
 ### 搜索仓库
 
@@ -62,8 +62,6 @@ in|在何字段中对q进行搜索。可用值为repository相关response中的�
 forks|forks字段过滤|`forks:100`
 stars|同forks，过滤使用|`stars:100`
 language|搜索的语言类型，例 java,c,python 等|`language:node`
-
----
 
 可选字段
 
