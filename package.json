@@ -13,7 +13,7 @@
         "build": "npm run clean && babel src -d lib --copy-files --ignore '**/*.spec.js' -s && npm run pack",
         "pack": "pkg . --out-path packed",
         "clean": "rimraf lib packed",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "echo \"no test specified\"",
         "prepublishOnly": "npm run build && echo '#!/usr/bin/env node' | cat - lib/cli.js > temp && mv temp lib/cli.js"
     },
     "repository": {
