@@ -31,7 +31,7 @@ program
     .on('--help', () => {
         console.log('');
         console.log('');
-        console.log(`  query 字段的可用取值:`);
+        console.log(`  query 扩展用法, 语法格式为 keywords+key:value+key2:value:`);
         console.log('');
         console.log(`    type: 搜索的用户类型，user或者org, eg: ${neonGreen('type:user')}`);
         console.log('');
@@ -64,7 +64,7 @@ program
     .on('--help', () => {
         console.log('');
         console.log('');
-        console.log(`  query 字段的可用取值:`);
+        console.log(`  query 扩展用法, 语法格式为 keywords+key:value+key2:value:`);
         console.log('');
         console.log(`    in: 在何字段中对q进行搜索。可用值为repository相关response中的字段, eg: ${neonGreen('in:c')}`);
         console.log('');
