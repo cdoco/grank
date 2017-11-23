@@ -20,11 +20,8 @@ const catchError = (err, apiName) => {
     process.exit(1);
 };
 
-const user = async(query, option) => {
+const user = async(query = 'location:china', { num = 10, page, sort, order }) => {
     let userInfos;
-    //设定默认值
-    query = query || 'location:china';
-    option.num = option.num || 10;
     const userTable = basicTable();
 
     //title
@@ -49,10 +46,10 @@ const user = async(query, option) => {
     try {
         const rsp = await json.get('/search/users?q=' + query, {
             params: {
-                per_page: option.num,
-                page: option.page,
-                sort: option.sort,
-                order: option.order
+                per_page: num,
+                page: page,
+                sort: sort,
+                order: order
             }
         });
         userInfos = rsp.data;
