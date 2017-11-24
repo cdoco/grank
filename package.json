@@ -1,6 +1,6 @@
 {
     "name": "grank",
-    "version": "1.0.16",
+    "version": "1.0.17",
     "description": "Github Rank Cli",
     "main": "lib/cli.js",
     "bin": {

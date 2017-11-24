@@ -1,9 +1,13 @@
 import axios from 'axios';
 
-const json = axios.create({
+//github
+const github = axios.create({
     baseURL: 'https://api.github.com',
 });
 
-module.exports = {
-    json,
-};
+//codehub
+const codehub = axios.create({
+    baseURL: 'http://trending.codehub-app.com/v2',
+});
+
+module.exports = { github, codehub };

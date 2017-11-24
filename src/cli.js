@@ -22,6 +22,23 @@ if (!isAsyncSupported()) {
 program.version(pkg.version);
 
 program
+    .command('trend')
+    .alias('t')
+    .option('-s, --since <since>', `查询天或者周或者月, 默认 daily, 可选值 daily, weekly, monthly, eg: ${neonGreen('-s weekly')}`)
+    .option('-l, --language <language>', `查询某个语言, eg: ${neonGreen('-l java')}`)
+    .on('--help', () => {
+        console.log('');
+        console.log('');
+        console.log(`  示例:`);
+        console.log('');
+        console.log(`  ${neonGreen('grank trend -s daily -l all')}`);
+        console.log('');
+    })
+    .action(option => {
+        grank.trend(option);
+    });
+
+program
     .command('user [query]')
     .alias('u')
     .option('-s, --sort <sort>', "排序依据, 值可为 followers, repositories, or joined。默认为 best match")
@@ -88,11 +105,13 @@ program.on('--help', () => {
             console.log('');
             console.log(`  Welcome to ${chalk`{bold.hex('#0069b9') Github Rank}`} ${red('Cli')} !`);
             console.log('');
+            console.log(`  查询最热的项目: ${neonGreen('grank trend')}`);
+            console.log('');
             console.log(`  查询用户排名: ${neonGreen('grank user [query]')}`);
             console.log('');
             console.log(`  查询仓库排名: ${neonGreen('grank repo [query]')}`);
             console.log('');
-            console.log(`  想要获取更多的信息你可以查看帮助文档 ${neonGreen('grank user -h')} or ${neonGreen('grank repo -h')}`);
+            console.log(`  想要获取更多的信息你可以查看帮助文档 ${neonGreen('grank trend -h')} or ${neonGreen('grank user -h')} or ${neonGreen('grank repo -h')}`);
             console.log('');
 });
 

@@ -1,7 +1,8 @@
 import ora from 'ora';
+import pMap from 'p-map';
 import format from 'date-fns/format';
 
-import { github } from '../../utils/json';
+import { codehub } from '../../utils/json';
 import { cfonts } from '../../utils/cfonts';
 import { basicTable } from '../../utils/table';
 import { error, red, bold, neonGreen } from '../../utils/chalk';
@@ -19,57 +20,58 @@ const catchError = (err, apiName) => {
     process.exit(1);
 };
 
-const repo = async(query = 'language:node', { num = 10, page, sort = 'stars', order } = {}) => {
-    let repoInfos;
-    const repoTable = basicTable();
+const trend = async({ since = 'daily', language = 'all' } = {}) => {
+    let trendInfos;
+    const trendTable = basicTable();
 
     //title
-    cfonts('Grank Repo');
+    cfonts('Trending');
 
-    repoTable.push(
+    trendTable.push(
         alignCenter([
             bold(neonGreen("rank")),
             bold(neonGreen("name")),
             bold(neonGreen("language")),
             bold(neonGreen("stars")),
+            bold(neonGreen("forks")),
             bold(neonGreen("address")),
             bold(neonGreen("created")),
         ])
     );
 
     //loading style
-    const spinner = ora('Loading GitHub Rank For Repositorie').start();
+    const spinner = ora('Loading GitHub Trending').start();
 
     try {
-        const rsp = await github.get('/search/repositories?q=' + query, {
+        const rsp = await codehub.get('/trending', {
             params: {
-                per_page: num,
-                page: page,
-                sort: sort,
-                order: order
+                since: since,
+                language: language,
             }
         });
-        repoInfos = rsp.data;
+        trendInfos = rsp.data;
     } catch (error) {
         spinner.stop();
-        catchError(error, 'Repositories');
+        catchError(error, 'Trending');
     }
 
-    repoInfos.items.forEach((item, index) => {
+    trendInfos.slice(0, 15).forEach((item, index) => {
         const {
             full_name,
-            html_url,
             language,
             stargazers_count,
+            forks,
+            html_url,
             created_at
         } = item;
 
-        repoTable.push(
+        trendTable.push(
             alignCenter([
                 ++index,
                 full_name,
                 language,
                 stargazers_count,
+                forks,
                 html_url,
                 format(created_at, 'YYYY/MM/DD'),
             ])
@@ -78,7 +80,8 @@ const repo = async(query = 'language:node', { num = 10, page, sort = 'stars', or
 
     spinner.stop();
 
-    console.log(repoTable.toString());
-};
+    console.log(trendTable.toString());
 
-export default repo;
+}
+
+export default trend;

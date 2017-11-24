@@ -1,8 +1,10 @@
-<div align=center><img src="https://cdoco.com/images/grank.png" alt="grank"/></div>
-<a target="_blank" href="https://npmjs.org/package/grank" title="NPM version"><img src="https://img.shields.io/npm/v/grank.svg"></a>
-<a target="_blank" href="https://travis-ci.org/cdoco/grank" title="Build Status"><img src="https://travis-ci.org/cdoco/grank.svg?branch=master"></a>
-<a target="_blank" href="https://opensource.org/licenses/MIT" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
-<a target="_blank" href="http://nodejs.org/download/" title="Node version"><img src="https://img.shields.io/badge/node.js-%3E=_6.0-green.svg"></a>
+<div align=center>
+    <p><img src="https://cdoco.com/images/grank.png" alt="grank"/></p>
+    <a target="_blank" href="https://npmjs.org/package/grank" title="NPM version"><img src="https://img.shields.io/npm/v/grank.svg"></a>
+    <a target="_blank" href="https://travis-ci.org/cdoco/grank" title="Build Status"><img src="https://travis-ci.org/cdoco/grank.svg?branch=master"></a>
+    <a target="_blank" href="https://opensource.org/licenses/MIT" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+    <a target="_blank" href="http://nodejs.org/download/" title="Node version"><img src="https://img.shields.io/badge/node.js-%3E=_6.0-green.svg"></a>
+</div>
 
 ## 安装
 
@@ -12,11 +14,26 @@ npm install -g grank
 
 ## 使用
 
+### 最热项目排名
+
+```shell
+//用法
+grank trend -s|--since <since> -l|--language <language>
+
+//示例
+grank trend -s daily -l all
+```
+
+字段|含义
+-|-
+since|查询天或者周或者月, 默认 daily, 可选值 daily, weekly, monthly
+language|查询某个语言, 例如 c, java, node
+
 ### 搜索用户
 
 ```shell
 //用法
-grank user [query] --sort <sort> --order <order> --num <num> --page <page>
+grank user [query] -s|--sort <sort> -o|--order <order> -n|--num <num> -p|--page <page>
 
 //示例
 grank user location:china+language:c -n 5 -s followers -o desc
@@ -48,7 +65,7 @@ page|查询第几页
 
 ```shell
 //用法
-grank repo [query] --sort <sort> --order <order> --num <num> --page <page>
+grank repo [query] -s|--sort <sort> -o|--order <order> -n|--num <num> -p|--page <page>
 
 //示例
 grank repo language:node -n 5 -s stars -o desc

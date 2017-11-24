@@ -2,7 +2,7 @@ import ora from 'ora';
 import pMap from 'p-map';
 import format from 'date-fns/format';
 
-import { json } from '../../utils/json';
+import { github } from '../../utils/json';
 import { cfonts } from '../../utils/cfonts';
 import { basicTable } from '../../utils/table';
 import { error, red, bold, neonGreen } from '../../utils/chalk';
@@ -25,7 +25,7 @@ const user = async(query = 'location:china', { num = 10, page, sort, order } = {
     const userTable = basicTable();
 
     //title
-    cfonts('Github Rank');
+    cfonts('Grank User');
 
     userTable.push(
         alignCenter([
@@ -44,7 +44,7 @@ const user = async(query = 'location:china', { num = 10, page, sort, order } = {
     const spinner = ora('Loading GitHub Rank For User').start();
 
     try {
-        const rsp = await json.get('/search/users?q=' + query, {
+        const rsp = await github.get('/search/users?q=' + query, {
             params: {
                 per_page: num,
                 page: page,
@@ -64,7 +64,7 @@ const user = async(query = 'location:china', { num = 10, page, sort, order } = {
             let detail;
 
             try {
-                const rsp = await json.get(item.url);
+                const rsp = await github.get(item.url);
                 detail = rsp.data;
             } catch (error) {
                 spinner.stop();
