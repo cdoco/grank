@@ -24,8 +24,6 @@ grank trend -s|--since <since> -l|--language <language>
 grank trend -s daily -l all
 ```
 
-![](https://cdoco.com/images/trending.png)
-
 字段|含义
 -|-
 since|查询天或者周或者月, 默认 daily, 可选值 daily, weekly, monthly
