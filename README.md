@@ -14,7 +14,7 @@ npm install -g grank
 
 ## 使用
 
-### 最热项目排名
+### 最热项目
 
 ```shell
 //用法
