@@ -12,6 +12,8 @@
 npm install -g grank
 ```
 
+![](https://cdoco.com/images/grank.gif)
+
 ## 使用
 
 ### 最热项目
